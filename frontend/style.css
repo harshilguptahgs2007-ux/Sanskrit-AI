@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #171329;
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 35px;
+    background: #241c40;
+}
+
+header h1 {
+    color: #e5bd76;
+    font-size: 38px;
+}
+
+header p {
+    margin-top: 10px;
+    color: #ddd;
+}
+
+main {
+    max-width: 750px;
+    margin: 50px auto;
+    padding: 25px;
+}
+
+h2, h3 {
+    margin-bottom: 18px;
+}
+
+.controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+label {
+    font-size: 14px;
+    color: #ccc;
+}
+
+select {
+    background: #241c40;
+    color: #e5bd76;
+    border: 1px solid #a78bfa;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+#charCount {
+    font-size: 14px;
+    color: #aaa;
+}
+
+textarea {
+    width: 100%;
+    height: 180px;
+    padding: 18px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #a78bfa;
+    background: #1f1837;
+    color: #fff;
+    resize: vertical;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #c4b5fd;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 18px 0;
+}
+
+button {
+    background: #a78bfa;
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s ease;
+}
+
+button:hover {
+    background: #8061d9;
+}
+
+button:disabled {
+    background: #5b4887;
+    cursor: not-allowed;
+}
+
+.secondary-btn {
+    background: #2d244c;
+    border: 1px solid #a78bfa;
+}
+
+.secondary-btn:hover {
+    background: #3e3366;
+}
+
+#outputText {
+    background: #29213e;
+    padding: 22px;
+    min-height: 110px;
+    border-radius: 10px;
+    font-size: 23px;
+    line-height: 1.8;
+    color: #e5bd76;
+    border: 1px solid #3c325c;
+    word-break: break-word;
+}

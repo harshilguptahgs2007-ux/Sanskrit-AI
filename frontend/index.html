@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanskrit AI Translator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>संस्कृत AI</h1>
+        <p>Multilingual AI Sanskrit Translator</p>
+    </header>
+
+    <main>
+        <h2>Translate into Sanskrit</h2>
+
+        <div class="controls-row">
+            <div>
+                <label for="sourceLanguage">Source Language: </label>
+                <select id="sourceLanguage">
+                    <option value="en-IN" selected>English</option>
+                    <option value="hi-IN">Hindi (हिन्दी)</option>
+                    <option value="bn-IN">Bengali (বাংলা)</option>
+                    <option value="gu-IN">Gujarati (ગુજરાતી)</option>
+                    <option value="kn-IN">Kannada (ಕನ್ನಡ)</option>
+                    <option value="ml-IN">Malayalam (മലയാളം)</option>
+                    <option value="mr-IN">Marathi (मराठी)</option>
+                    <option value="od-IN">Odia (ଓଡ଼ିଆ)</option>
+                    <option value="pa-IN">Punjabi (ਪੰਜਾਬੀ)</option>
+                    <option value="ta-IN">Tamil (தமிழ்)</option>
+                    <option value="te-IN">Telugu (తెలుగు)</option>
+                </select>
+            </div>
+            <div id="charCount">0/2000</div>
+        </div>
+
+        <textarea id="inputText" placeholder="Enter your message in any language..."></textarea>
+
+        <div class="button-group">
+            <button id="translateBtn">Translate to Sanskrit</button>
+            <button id="clearBtn" class="secondary-btn">Clear</button>
+        </div>
+
+        <h3>Sanskrit Translation</h3>
+
+        <div id="outputText">
+            Your Sanskrit translation will appear here...
+        </div>
+
+        <div class="button-group">
+            <button id="copyBtn">Copy Translation</button>
+            <button id="downloadBtn" class="secondary-btn">Download</button>
+        </div>
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+</html>
