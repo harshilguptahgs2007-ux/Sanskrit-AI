@@ -8,8 +8,10 @@ from pydantic import BaseModel, Field
 
 try:
     from backend.translator import translate_to_sanskrit
+    from backend.analyzer import interpret_shloka
 except ModuleNotFoundError:
     from translator import translate_to_sanskrit
+    from analyzer import interpret_shloka
 
 app = FastAPI(title="Sanskrit AI Translator")
 
@@ -24,6 +26,10 @@ app.add_middleware(
 class TranslationRequest(BaseModel):
     text: str = Field(min_length=1, max_length=2000)
     source_language_code: str = "en-IN"
+
+class InterpretRequest(BaseModel):
+    shloka: str = Field(min_length=1, max_length=4000)
+    mode: str = "full"
 
 @app.get("/health")
 @app.get("/api/health")
@@ -54,6 +60,23 @@ def translate(request: TranslationRequest):
         raise HTTPException(
             status_code=502,
             detail=f"Translation service failed: {str(error)}"
+        )
+
+@app.post("/interpret")
+@app.post("/api/interpret")
+def interpret(request: InterpretRequest):
+    try:
+        result = interpret_shloka(request.shloka, request.mode)
+        return result
+
+    except ValueError as error:
+        raise HTTPException(status_code=400, detail=str(error))
+
+    except Exception as error:
+        print("Interpretation error:", str(error))
+        raise HTTPException(
+            status_code=502,
+            detail=f"Interpretation service failed: {str(error)}"
         )
 
 # Frontend static files mounting

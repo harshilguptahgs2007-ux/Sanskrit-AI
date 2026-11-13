@@ -1,105 +1,145 @@
-# Sanskrit AI Translator (संस्कृत AI)
+# Shlokawise (संस्कृत AI) — Sanskrit AI Shloka Translator & Analyzer
 
-A multilingual AI-powered translation web application that translates text from multiple Indian languages and English into Sanskrit using the Sarvam AI API and FastAPI.
+> **BY SANATANA360**  
+> An elegant, spiritual, and AI-powered Sanskrit shloka translator and analyzer that decodes ancient Vedic, Upanishadic, and Gita verses with word-by-word grammatical breakdowns, philosophical interpretations, meter identification, reflection prompts, and cross-faith comparative wisdom.
+
+---
+
+## 🎨 Design & Aesthetic Identity
+
+- **Background:** Warm Ivory (`#FBF7EF`)
+- **Primary Orange:** Vibrant Spiritual Ochre (`#C96A16`)
+- **Text:** Dark Brown (`#493323`) & Muted Terracotta (`#7A583E`)
+- **Surface / Cards:** Light Cream (`#F8EFE2`)
+- **Borders:** Warm Peach (`#E8C9A9`)
+- **Typography:**
+  - Headings: *Cormorant Garamond* (Serif, Italic)
+  - Sanskrit Verses: *Noto Serif Devanagari*
+  - Navigation & Body: *Inter*
 
 ---
 
 ## 📁 Project Structure
 
 ```
-Sanskrit-AI/
+Sanskrit-AI-Translator/
 ├── backend/
 │   ├── .env.example
-│   ├── app.py
-│   ├── requirements.txt
-│   └── translator.py
+│   ├── app.py           # FastAPI entrypoint (POST /interpret and POST /translate)
+│   ├── analyzer.py      # Sanskrit scholarship engine & Sarvam 105B AI integration
+│   ├── translator.py    # Sarvam AI translation client
+│   └── requirements.txt
 ├── frontend/
-│   ├── index.html
-│   ├── script.js
-│   └── style.css
-├── .gitignore
+│   ├── index.html       # Semantic HTML5 Shlokawise interface
+│   ├── style.css        # Pure CSS3 responsive spiritual design system
+│   └── script.js        # Vanilla JavaScript logic, API integration, and interactions
+├── index.html           # Mirror copy for root static serving
+├── style.css
+├── script.js
+├── main.py              # Application runner
 └── README.md
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 How to Run Locally
 
-### Prerequisites
+### Option 1: Full-Stack with FastAPI (Recommended)
 
-- Python 3.10+
-- Sarvam AI API Key ([sarvam.ai](https://www.sarvam.ai/))
-
----
-
-### Backend Setup
-
-1. Open your terminal and navigate to the backend folder:
+1. Open your terminal in the project root:
    ```bash
-   cd backend
+   cd c:\Users\ASUS\Downloads\Sanskrit-AI-Translator
    ```
 
-2. Create and activate a virtual environment:
+2. Activate the virtual environment:
    - **Windows:**
-     ```bash
-     python -m venv venv
-     .\venv\Scripts\activate
+     ```powershell
+     .\backend\venv\Scripts\Activate.ps1
      ```
    - **Linux / macOS:**
      ```bash
-     python3 -m venv venv
-     source venv/bin/activate
+     source backend/venv/bin/activate
      ```
 
-3. Install required packages:
+3. Ensure dependencies are installed:
    ```bash
-   pip install -r requirements.txt
+   pip install -r backend/requirements.txt
    ```
 
-4. Configure environment variables:
-   - Copy `.env.example` to `.env`:
-     ```bash
-     cp .env.example .env
-     ```
-   - Open `.env` and add your Sarvam AI API key:
-     ```env
-     SARVAM_API_KEY=your_sarvam_api_key_here
-     ```
-
-5. Start the backend server:
-   ```bash
-   uvicorn app:app --reload --port 8000
+4. Make sure your `.env` file in `backend/.env` contains your Sarvam AI API Key:
+   ```env
+   SARVAM_API_KEY=your_sarvam_api_key_here
    ```
-   The backend API will be available at `http://127.0.0.1:8000`.
+
+5. Start the FastAPI server:
+   ```bash
+   uvicorn backend.app:app --reload --port 8000
+   ```
+
+6. Open your web browser and navigate to:
+   ```
+   http://127.0.0.1:8000
+   ```
+   The FastAPI server automatically serves the frontend interface (`index.html`, `style.css`, `script.js`) and powers the `/interpret` API!
 
 ---
 
-### Frontend Setup
+### Option 2: Running the Frontend Separately (Static Server or Live Server)
 
-1. Open the `frontend` folder.
-2. Launch `index.html` in your browser or run a local static server (e.g. using VS Code Live Server or Python):
+1. Start the backend as described above on `http://127.0.0.1:8000`.
+2. Open `frontend/index.html` directly in your browser, or launch it with any local static web server (such as VS Code Live Server or Python):
    ```bash
    cd frontend
    python -m http.server 3000
    ```
-3. Open `http://localhost:3000` (or `http://127.0.0.1:5500`) in your web browser.
+3. Visit `http://localhost:3000`. `script.js` automatically connects to `http://127.0.0.1:8000/interpret` via CORS!
 
 ---
 
-### Vercel Deployment
+## 🌟 Core Features
 
-1. Import the repository `https://github.com/harshilguptahgs2007-ux/Sanskrit-AI` into your Vercel dashboard.
-2. In the Vercel project configuration, go to **Settings > Environment Variables**.
-3. Add the variable:
-   - **Key:** `SARVAM_API_KEY`
-   - **Value:** `your_sarvam_api_key_here`
-4. Click **Deploy**. Vercel will automatically build the FastAPI backend using `pyproject.toml` and serve both the frontend UI and the backend API!
+1. **Top Navigation Bar:**
+   - Circular Om (ॐ) logo with orange background.
+   - Brand title `Shlokawise` with `BY SANATANA360`.
+   - Links: *Interpret*, *Learn*, *Community*, *Daily*.
+   - User profile dropdown menu (Seeker Account, Saved Shlokas, Reading History).
+   - Mobile responsive hamburger navigation drawer.
+
+2. **Hero Section & Live Statistics:**
+   - Heading: *"Translate, Interpret & Understand"* in Cormorant Garamond italic.
+   - Statistics: `5000+ SHLOKAS`, `6 TRADITIONS`, `177 DAILY VERSES`, `∞ WISDOM`.
+
+3. **Sanskrit Shloka Input Card:**
+   - Devanagari Unicode multiline textarea with character counter.
+   - Authentic 1-click example verses:
+     - **BG 2.47** (*Karmanye Vadhikaraste...*)
+     - **Gayatri** (*Om Bhur Bhuvah Svah...*)
+     - **Yoga Sutras** (*Yogas Chitta Vritti Nirodhah...*)
+     - **Shanti Mantra** (*Om Saha Navavatu...*)
+     - **Ishavasya** (*Isha Vasyam Idam Sarvam...*)
+
+4. **Three Interpretation Modes:**
+   - **Full Mode:** Complete report with Sanskrit text, transliteration, word-by-word grammatical breakdown, translation, philosophical exposition, scriptural context, takeaways, and contemplation prompts.
+   - **Quick Mode:** Concise summary, core translation, and primary teaching.
+   - **+ Cross-Faith Mode:** Comparative analysis contrasting the verse with Stoicism, Buddhism, Taoism, Christianity, and universal human ethics.
+
+5. **AI Results Presentation:**
+   - Prominent Devanagari calligraphy card with meter badge.
+   - IAST Roman transliteration with diacritical marks.
+   - English poetic translation.
+   - Word-by-word analysis table (Sanskrit Word, Transliteration, Grammar/Sandhi, Meaning).
+   - Philosophical Meaning (Darshana & Tattva).
+   - Historical & Spiritual Context.
+   - Key Takeaways & Reflection Questions.
+   - Cross-Faith Wisdom Grid.
+   - One-click copy buttons for Sanskrit verse, English translation, and complete Markdown export.
+
+6. **Additional Knowledge Modules:**
+   - **Learn Section:** Introduction to Sanskrit phonetics, Bhagavad Gita paths, Paninian grammar basics (Vibhaktis, Dhatus, Sandhi), and interactive glossary pills (*Dharma*, *Satya*, *Moksha*, *Brahman*, *Atman*, *Ahimsa*).
+   - **Community Section:** Forum discussion cards with reflections from seekers and scholars.
+   - **Daily Wisdom Section:** Handpicked contemplation verse (*Katha Upanishad 1.3.14*) with an instant "Explore Complete Interpretation ✦" action.
 
 ---
 
-## ✨ Features
-
-- **Multi-language Support:** Translate from English, Hindi, Bengali, Gujarati, Kannada, Malayalam, Marathi, Odia, Punjabi, Tamil, and Telugu into Sanskrit.
-- **Character Counter:** Real-time limit tracker (up to 2000 characters).
-- **One-click Copy & Download:** Copy translation to clipboard or download as a text file.
-- **Responsive UI:** Dark theme styled with modern typography and golden accents.
+## 🔒 Security Note
+The frontend code contains **no secret API keys**. All AI generation requests are handled securely by the backend (`backend/app.py` & `backend/analyzer.py`) through server-side environment variables (`SARVAM_API_KEY`).

@@ -3,58 +3,629 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanskrit AI Translator</title>
+    <title>Shlokawise — Sanskrit AI Shloka Translator & Analyzer</title>
+    <meta name="description" content="Translate, interpret and understand Sanskrit shlokas with AI-powered word-by-word analysis, philosophical meaning, meter, and cross-faith parallels.">
+
+    <!-- Google Fonts: Cormorant Garamond, Inter, Noto Serif Devanagari -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>संस्कृत AI</h1>
-        <p>Multilingual AI Sanskrit Translator</p>
+    <!-- 1. Navigation Bar -->
+    <header class="site-header">
+        <nav class="navbar">
+            <!-- Brand Logo & Name -->
+            <a href="#home" class="brand-group">
+                <div class="om-logo-circle" aria-label="Om Logo">
+                    <span class="om-symbol">ॐ</span>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">Shlokawise</span>
+                    <span class="brand-subtitle">BY SANATANA360</span>
+                </div>
+            </a>
+
+            <!-- Center Navigation Links -->
+            <div class="nav-center" id="navLinks">
+                <a href="#interpret" class="nav-link active">Interpret</a>
+                <a href="#learn" class="nav-link">Learn</a>
+                <a href="#community" class="nav-link">Community</a>
+                <a href="#daily" class="nav-link">Daily</a>
+            </div>
+
+            <!-- Right Profile Menu -->
+            <div class="nav-right">
+                <div class="profile-dropdown-container">
+                    <button class="profile-button" id="profileBtn" aria-expanded="false" aria-haspopup="true">
+                        <div class="profile-avatar">
+                            <span class="avatar-icon">ॐ</span>
+                        </div>
+                        <span class="profile-username">Arjun V.</span>
+                        <svg class="dropdown-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown Profile Menu -->
+                    <div class="profile-menu" id="profileMenu">
+                        <div class="profile-menu-header">
+                            <div class="menu-user-badge">Seeker Account</div>
+                            <div class="menu-user-name">Arjun Varma</div>
+                            <div class="menu-user-email">arjun@sanatana360.org</div>
+                        </div>
+                        <div class="profile-menu-items">
+                            <a href="#saved" class="profile-menu-item" id="menuSavedShlokas">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                <span>My Saved Shlokas</span>
+                                <span class="menu-item-badge">12</span>
+                            </a>
+                            <a href="#history" class="profile-menu-item" id="menuReadingHistory">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>Reading History</span>
+                            </a>
+                            <a href="#preferences" class="profile-menu-item" id="menuPreferences">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                <span>Tradition: Advaita</span>
+                            </a>
+                            <div class="profile-menu-divider"></div>
+                            <button class="profile-menu-item signout-btn" id="menuSignOut">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                                <span>Sign Out</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Drawer -->
+        <div class="mobile-nav-drawer" id="mobileDrawer">
+            <a href="#interpret" class="mobile-nav-link active">Interpret</a>
+            <a href="#learn" class="mobile-nav-link">Learn</a>
+            <a href="#community" class="mobile-nav-link">Community</a>
+            <a href="#daily" class="mobile-nav-link">Daily</a>
+            <div class="mobile-drawer-footer">
+                <div class="mobile-user-row">
+                    <span class="avatar-icon">ॐ</span>
+                    <span class="profile-username">Arjun V. (Sanatana360)</span>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <h2>Translate into Sanskrit</h2>
+    <!-- Main Content Container -->
+    <main class="page-container" id="home">
 
-        <div class="controls-row">
-            <div>
-                <label for="sourceLanguage">Source Language: </label>
-                <select id="sourceLanguage">
-                    <option value="en-IN" selected>English</option>
-                    <option value="hi-IN">Hindi (हिन्दी)</option>
-                    <option value="bn-IN">Bengali (বাংলা)</option>
-                    <option value="gu-IN">Gujarati (ગુજરાતી)</option>
-                    <option value="kn-IN">Kannada (ಕನ್ನಡ)</option>
-                    <option value="ml-IN">Malayalam (മലയാളം)</option>
-                    <option value="mr-IN">Marathi (मराठी)</option>
-                    <option value="od-IN">Odia (ଓଡ଼ିଆ)</option>
-                    <option value="pa-IN">Punjabi (ਪੰਜਾਬੀ)</option>
-                    <option value="ta-IN">Tamil (தமிழ்)</option>
-                    <option value="te-IN">Telugu (తెలుగు)</option>
-                </select>
+        <!-- 2. Hero Section -->
+        <section class="hero-section">
+            <div class="hero-badge">✦ VEDIC INTELLIGENCE ENGINE ✦</div>
+            <h1 class="hero-title">Translate, Interpret &amp; Understand</h1>
+            <p class="hero-description">
+                Enter any Sanskrit shloka for instant translation, word analysis, philosophical meaning, meter, and reflection prompts. Perfect for students, spiritual seekers, and Sanskrit enthusiasts looking to understand the depth of ancient wisdom.
+            </p>
+        </section>
+
+        <!-- 3. Statistics Section -->
+        <section class="stats-section" aria-label="Shlokawise Key Statistics">
+            <div class="stat-card">
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">SHLOKAS</div>
             </div>
-            <div id="charCount">0/2000</div>
-        </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">TRADITIONS</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+                <div class="stat-number">177</div>
+                <div class="stat-label">DAILY VERSES</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">WISDOM</div>
+            </div>
+        </section>
 
-        <textarea id="inputText" placeholder="Enter your message in any language..."></textarea>
+        <!-- 4. Sanskrit Shloka Input Card -->
+        <section class="interpreter-section" id="interpret">
+            <div class="shloka-input-card">
+                <!-- Card Header -->
+                <div class="card-top-row">
+                    <div class="card-instruction">
+                        <span class="star-glyph">✦</span> PASTE OR TYPE YOUR SANSKRIT SHLOKA BELOW
+                    </div>
+                    <div class="card-subtitle">
+                        Any text from any scripture
+                    </div>
+                </div>
 
-        <div class="button-group">
-            <button id="translateBtn">Translate to Sanskrit</button>
-            <button id="clearBtn" class="secondary-btn">Clear</button>
-        </div>
+                <!-- Textarea -->
+                <div class="textarea-wrapper">
+                    <textarea 
+                        id="shlokaInput" 
+                        class="shloka-textarea" 
+                        rows="4" 
+                        placeholder="e.g. कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।&#10;मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥"
+                        spellcheck="false"
+                    ></textarea>
+                    <div class="char-counter" id="charCounter">0 / 4000 characters</div>
+                </div>
 
-        <h3>Sanskrit Translation</h3>
+                <!-- Validation / Feedback Banner -->
+                <div class="validation-banner" id="validationBanner" role="alert" hidden>
+                    <span class="validation-icon">⚠</span>
+                    <span class="validation-text" id="validationText">Please enter or choose a Sanskrit shloka to interpret.</span>
+                </div>
 
-        <div id="outputText">
-            Your Sanskrit translation will appear here...
-        </div>
+                <!-- Example Shloka Buttons -->
+                <div class="examples-container">
+                    <span class="examples-tag">EXAMPLES:</span>
+                    <div class="example-buttons-group">
+                        <button type="button" class="example-btn" data-verse="bg247">BG 2.47</button>
+                        <button type="button" class="example-btn" data-verse="gayatri">Gayatri</button>
+                        <button type="button" class="example-btn" data-verse="yogasutras">Yoga Sutras</button>
+                        <button type="button" class="example-btn" data-verse="shanti">Shanti Mantra</button>
+                        <button type="button" class="example-btn" data-verse="ishavasya">Ishavasya</button>
+                    </div>
+                </div>
 
-        <div class="button-group">
-            <button id="copyBtn">Copy Translation</button>
-            <button id="downloadBtn" class="secondary-btn">Download</button>
-        </div>
+                <!-- Mode Selector & Interpret Action Row -->
+                <div class="card-action-row">
+                    <!-- Interpretation Mode Selector -->
+                    <div class="mode-selector-group" role="radiogroup" aria-label="Interpretation Mode">
+                        <button type="button" class="mode-btn active" data-mode="full" role="radio" aria-checked="true">
+                            Full
+                        </button>
+                        <button type="button" class="mode-btn" data-mode="quick" role="radio" aria-checked="false">
+                            Quick
+                        </button>
+                        <button type="button" class="mode-btn" data-mode="cross_faith" role="radio" aria-checked="false">
+                            + Cross-Faith
+                        </button>
+                    </div>
+
+                    <!-- Interpret Button -->
+                    <div class="action-submit-group">
+                        <button type="button" class="interpret-btn" id="interpretBtn">
+                            <span class="btn-spinner" id="btnSpinner" hidden></span>
+                            <span class="btn-label" id="btnLabel">Interpret ✦</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Error Message Card (Shown when backend is unreachable) -->
+        <section class="backend-error-container" id="errorSection" hidden>
+            <div class="error-card">
+                <div class="error-header">
+                    <div class="error-badge">⚠ SERVER CONNECTION NOTICE</div>
+                    <button class="error-close" id="errorCloseBtn">&times;</button>
+                </div>
+                <h3 class="error-title" id="errorTitle">Unable to Connect to FastAPI Backend</h3>
+                <p class="error-message" id="errorMessage">
+                    The interpretation request could not reach the backend server.
+                </p>
+                <div class="error-instructions">
+                    <div class="instructions-label">How to start your local backend:</div>
+                    <code>uvicorn backend.app:app --reload --port 8000</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. AI Results Section -->
+        <section class="results-section" id="resultsSection" hidden>
+            <div class="results-header-card">
+                <div class="results-meta">
+                    <span class="results-badge" id="resultModeBadge">✦ FULL INTERPRETATION</span>
+                    <h2 class="results-title" id="resultTitle">Bhagavad Gita — Chapter 2, Verse 47</h2>
+                    <span class="results-meter" id="resultMeter">Meter: Anuṣṭubh Chhandas</span>
+                </div>
+                <div class="results-actions">
+                    <button type="button" class="action-pill-btn" id="copyAllBtn">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span>Copy Full Report</span>
+                    </button>
+                    <button type="button" class="action-pill-btn" id="newInterpretBtn">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                        <span>New Shloka</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 1: Original Sanskrit Shloka -->
+            <article class="result-card shloka-primary-card">
+                <div class="card-header-line">
+                    <h3 class="card-heading">✦ Original Sanskrit Shloka</h3>
+                    <button type="button" class="copy-icon-btn" id="copyShlokaBtn" aria-label="Copy Sanskrit Shloka">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span class="copy-text">Copy Shloka</span>
+                    </button>
+                </div>
+                <div class="sanskrit-display" id="resSanskrit">
+                    कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।<br>
+                    मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥
+                </div>
+            </article>
+
+            <!-- Card 2: Transliteration -->
+            <article class="result-card transliteration-card" id="cardTransliteration">
+                <div class="card-header-line">
+                    <h3 class="card-heading">✦ IAST Roman Transliteration</h3>
+                </div>
+                <div class="transliteration-text" id="resTransliteration">
+                    karmaṇy-evādhikāras te mā phaleṣu kadācana |<br>
+                    mā karma-phala-hetur bhūr mā te saṅgo 'stv akarmaṇi ||
+                </div>
+            </article>
+
+            <!-- Card 3: English Translation -->
+            <article class="result-card translation-card">
+                <div class="card-header-line">
+                    <h3 class="card-heading">✦ English Translation</h3>
+                    <button type="button" class="copy-icon-btn" id="copyTranslationBtn" aria-label="Copy English Translation">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span class="copy-text">Copy Translation</span>
+                    </button>
+                </div>
+                <blockquote class="translation-text" id="resTranslation">
+                    You have a right only to perform your prescribed duty, but never to the fruits of action. Never consider yourself the cause of the results of your activities, and never be attached to inaction.
+                </blockquote>
+            </article>
+
+            <!-- Card 4: Word-by-Word Analysis (Full/Cross-Faith) -->
+            <article class="result-card word-analysis-card" id="cardWordByWord">
+                <div class="card-header-line">
+                    <h3 class="card-heading">✦ Word-by-Word Analysis (Padachheda &amp; Artha)</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="word-table">
+                        <thead>
+                            <tr>
+                                <th>Sanskrit Word</th>
+                                <th>Transliteration</th>
+                                <th>Grammatical Analysis</th>
+                                <th>Meaning</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resWordTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <!-- Card 5: Philosophical Meaning -->
+            <article class="result-card philosophical-card" id="cardPhilosophical">
+                <div class="card-header-line">
+                    <h3 class="card-heading">✦ Philosophical Meaning (Darshana &amp; Tattva)</h3>
+                </div>
+                <div class="card-body-text" id="resPhilosophical">
+                    <!-- Populated dynamically -->
+                </div>
+            </article>
+
+            <!-- Card 6: Historical & Spiritual Context -->
+            <article class="result-card context-card" id="cardContext">
+                <div class="card-header-line">
+                    <h3 class="card-heading">✦ Historical &amp; Spiritual Context</h3>
+                </div>
+                <div class="card-body-text" id="resContext">
+                    <!-- Populated dynamically -->
+                </div>
+            </article>
+
+            <!-- Card 7: Key Takeaways -->
+            <article class="result-card takeaways-card" id="cardTakeaways">
+                <div class="card-header-line">
+                    <h3 class="card-heading">✦ Key Takeaways &amp; Life Lessons</h3>
+                </div>
+                <ul class="takeaways-list" id="resTakeaways">
+                    <!-- Populated dynamically -->
+                </ul>
+            </article>
+
+            <!-- Card 8: Reflection Questions -->
+            <article class="result-card reflections-card" id="cardReflections">
+                <div class="card-header-line">
+                    <h3 class="card-heading">✦ Contemplation &amp; Reflection Prompts</h3>
+                </div>
+                <div class="reflections-grid" id="resReflections">
+                    <!-- Populated dynamically -->
+                </div>
+            </article>
+
+            <!-- Card 9: Cross-Faith & Universal Parallel Traditions -->
+            <article class="result-card cross-faith-card" id="cardCrossFaith">
+                <div class="card-header-line">
+                    <h3 class="card-heading">✦ Cross-Faith Insights &amp; Universal Parallels</h3>
+                    <span class="universal-tag">Universal Wisdom</span>
+                </div>
+                <div class="universal-teaching-banner" id="resUniversalTeaching">
+                    The universal dichotomy of control: distinguishing what lies within our sovereign power from what lies beyond it.
+                </div>
+                <div class="traditions-grid" id="resCrossFaithGrid">
+                    <!-- Populated dynamically -->
+                </div>
+            </article>
+        </section>
+
+        <!-- 7. Learn Section -->
+        <section class="content-section" id="learn">
+            <div class="section-title-wrap">
+                <span class="section-tag">✦ SANSKRIT KNOWLEDGE BASE</span>
+                <h2 class="section-heading">Learn the Language of Consciousness</h2>
+                <p class="section-subtext">Deepen your mastery of sacred phonetics, grammar structures, and core Vedantic terminology.</p>
+            </div>
+
+            <div class="learn-grid">
+                <!-- Learn Card 1 -->
+                <div class="learn-card">
+                    <div class="learn-icon">वर्ण</div>
+                    <h3 class="learn-title">Introduction to Sanskrit</h3>
+                    <p class="learn-description">
+                        Known as <em>Devavani</em> (the language of the gods), Sanskrit is an extraordinarily precise phonetic language designed to produce vibrational resonances that harmonize cognitive state and consciousness.
+                    </p>
+                    <ul class="learn-points">
+                        <li><strong>50 Aksharas</strong>: Perfectly ordered by anatomical point of vocal contact.</li>
+                        <li><strong>Devanagari Script</strong>: "City of Divine Light" syllabic alphabet.</li>
+                        <li><strong>Sonic Vibrations</strong>: Chanting aligns brainwave coherence and memory.</li>
+                    </ul>
+                </div>
+
+                <!-- Learn Card 2 -->
+                <div class="learn-card">
+                    <div class="learn-icon">गीता</div>
+                    <h3 class="learn-title">Understanding Bhagavad Gita</h3>
+                    <p class="learn-description">
+                        A 700-verse philosophical conversation between Sri Krishna and Arjuna on the battlefield of Kurukshetra, synthesizing three immortal paths of spiritual liberation.
+                    </p>
+                    <ul class="learn-points">
+                        <li><strong>Karma Yoga</strong>: The path of selfless, detached, and dedicated action.</li>
+                        <li><strong>Bhakti Yoga</strong>: The path of unconditional divine love and surrender.</li>
+                        <li><strong>Jnana Yoga</strong>: The path of discrimination between transient and eternal.</li>
+                    </ul>
+                </div>
+
+                <!-- Learn Card 3 -->
+                <div class="learn-card">
+                    <div class="learn-icon">सूत्र</div>
+                    <h3 class="learn-title">Sanskrit Grammar Basics</h3>
+                    <p class="learn-description">
+                        Structured by the ancient grammarian Panini into the <em>Ashtadhyayi</em>, Sanskrit grammar acts like an exact algebraic algorithm with rigorous inflection rules.
+                    </p>
+                    <ul class="learn-points">
+                        <li><strong>8 Vibhaktis (Cases)</strong>: Prathama (Nominative) through Sambodhana (Vocative).</li>
+                        <li><strong>Dhatus (Verbal Roots)</strong>: Over 2,000 root seeds creating all nouns and verbs.</li>
+                        <li><strong>Sandhi (Euphonic Junctions)</strong>: Sound fusion rules between adjoining words.</li>
+                    </ul>
+                </div>
+
+                <!-- Learn Card 4 -->
+                <div class="learn-card">
+                    <div class="learn-icon">तत्त्व</div>
+                    <h3 class="learn-title">Key Sanskrit Vocabulary</h3>
+                    <p class="learn-description">
+                        Explore foundational philosophical terms that carry untranslatable depth in the Dharmic lexicon. Click any term to view its deeper root.
+                    </p>
+                    <div class="terms-cloud">
+                        <span class="term-pill" title="Righteousness, cosmic order, duty, moral law">धर्म (Dharma)</span>
+                        <span class="term-pill" title="Truth, reality, unchangeable essence">सत्य (Satya)</span>
+                        <span class="term-pill" title="Spiritual liberation, freedom from cycle of rebirth">मोक्ष (Moksha)</span>
+                        <span class="term-pill" title="The supreme non-dual infinite consciousness">ब्रह्मन् (Brahman)</span>
+                        <span class="term-pill" title="The eternal inner Self, the witness observer">आत्मन् (Atman)</span>
+                        <span class="term-pill" title="Non-violence, absence of harm in thought, word, and deed">अहिंसा (Ahimsa)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Community Section -->
+        <section class="content-section" id="community">
+            <div class="section-title-wrap">
+                <span class="section-tag">✦ SATSANG &amp; SANGHA</span>
+                <h2 class="section-heading">Explore Philosophical Community</h2>
+                <p class="section-subtext">Connect with scholars, students, and practitioners exploring the eternal truths of ancient Indian texts.</p>
+            </div>
+
+            <div class="community-grid">
+                <!-- Thread 1 -->
+                <div class="community-card">
+                    <div class="community-meta">
+                        <span class="topic-tag">Gita Study</span>
+                        <span class="topic-time">2 hours ago</span>
+                    </div>
+                    <h3 class="community-title">Nishkama Karma in modern high-pressure careers</h3>
+                    <p class="community-snippet">
+                        "How can a software engineer or surgeon remain genuinely detached from outcomes without sacrificing perfectionism in execution? BG 2.47 teaches that..."
+                    </p>
+                    <div class="community-footer">
+                        <div class="author-info">
+                            <span class="author-avatar">V</span>
+                            <span class="author-name">Vidya Ramanathan</span>
+                        </div>
+                        <div class="community-stats">
+                            <span>💬 28 replies</span>
+                            <span>✦ 142 insights</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thread 2 -->
+                <div class="community-card">
+                    <div class="community-meta">
+                        <span class="topic-tag">Vedic Chhandas</span>
+                        <span class="topic-time">Yesterday</span>
+                    </div>
+                    <h3 class="community-title">The rhythmic acoustics of the Gayatri Mantra</h3>
+                    <p class="community-snippet">
+                        "Studying the 24-syllable Gayatri meter. The tripartite division (8 + 8 + 8) resonates with three physiological states of consciousness: Jagrat, Swapna, Sushupti."
+                    </p>
+                    <div class="community-footer">
+                        <div class="author-info">
+                            <span class="author-avatar">S</span>
+                            <span class="author-name">Dr. Somesh Sharma</span>
+                        </div>
+                        <div class="community-stats">
+                            <span>💬 41 replies</span>
+                            <span>✦ 290 insights</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thread 3 -->
+                <div class="community-card">
+                    <div class="community-meta">
+                        <span class="topic-tag">Cross-Tradition</span>
+                        <span class="topic-time">3 days ago</span>
+                    </div>
+                    <h3 class="community-title">Patanjali's 'Chitta Vritti Nirodha' vs Stoic 'Prosochê'</h3>
+                    <p class="community-snippet">
+                        "Both Patanjali and Epictetus highlight the absolute necessity of watching the impressions (pratyaya / phantasiai) before assenting to emotional turbulence."
+                    </p>
+                    <div class="community-footer">
+                        <div class="author-info">
+                            <span class="author-avatar">M</span>
+                            <span class="author-name">Marcus K.</span>
+                        </div>
+                        <div class="community-stats">
+                            <span>💬 33 replies</span>
+                            <span>✦ 195 insights</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community CTA Box -->
+            <div class="community-cta-box">
+                <div class="cta-text">
+                    <div class="cta-title">Join the Global Sanskrit &amp; Vedanta Discussion Circle</div>
+                    <div class="cta-subtitle">Share your verse reflections, ask Sanskrit grammatical questions, and learn together.</div>
+                </div>
+                <button type="button" class="cta-btn" id="joinCommunityBtn">Share an Interpretation ✦</button>
+            </div>
+        </section>
+
+        <!-- 9. Daily Wisdom Section -->
+        <section class="content-section" id="daily">
+            <div class="section-title-wrap">
+                <span class="section-tag">✦ NITYA SHLOKA</span>
+                <h2 class="section-heading">Daily Sanskrit Wisdom</h2>
+                <p class="section-subtext">A handpicked contemplation verse to guide your day with serenity, focus, and clarity.</p>
+            </div>
+
+            <div class="daily-shloka-card">
+                <div class="daily-card-header">
+                    <div class="daily-date-badge">
+                        <span class="calendar-icon">📅</span> TODAY'S VERSE • KATHA UPANISHAD 1.3.14
+                    </div>
+                    <span class="daily-tradition-tag">Upanishadic Wisdom</span>
+                </div>
+
+                <div class="daily-sanskrit" id="dailySanskritText">
+                    उत्तिष्ठत जाग्रत प्राप्य वरान्निबोधत।<br>
+                    क्षुरस्य धारा निशिता दुरत्यया दुर्गं पथस्तत्कवयो वदन्ति॥
+                </div>
+
+                <div class="daily-transliteration" id="dailyTranslitText">
+                    uttiṣṭhata jāgrata prāpya varān nibodhata |<br>
+                    kṣurasya dhārā niśitā duratyayā durgaṁ pathas tat kavayo vadanti ||
+                </div>
+
+                <blockquote class="daily-meaning" id="dailyMeaningText">
+                    "Arise! Awake! Approach the enlightened teachers and realize the Self! The path is sharp as the edge of a razor, difficult to tread and hard to cross—so declare the wise sages."
+                </blockquote>
+
+                <div class="daily-action-footer">
+                    <div class="daily-meta-info">
+                        <strong>Theme:</strong> Spiritual awakening &amp; unwavering perseverance
+                    </div>
+                    <button type="button" class="daily-interpret-btn" id="dailyInterpretBtn">
+                        Explore Complete Interpretation ✦
+                    </button>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <script src="./script.js"></script>
+    <!-- 10. Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand-col">
+                <div class="footer-logo-row">
+                    <div class="om-logo-circle footer-logo">
+                        <span class="om-symbol">ॐ</span>
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-title footer-title">Shlokawise</span>
+                        <span class="brand-subtitle footer-subtitle">BY SANATANA360</span>
+                    </div>
+                </div>
+                <p class="footer-about">
+                    Dedicated to preserving, decoding, and illuminating the timeless wisdom of Sanskrit literature, Upanishads, and the Bhagavad Gita through artificial intelligence and reverent human scholarship.
+                </p>
+            </div>
+
+            <div class="footer-links-col">
+                <div class="footer-col-heading">Navigation</div>
+                <ul class="footer-links">
+                    <li><a href="#interpret">AI Interpreter</a></li>
+                    <li><a href="#learn">Learn Sanskrit</a></li>
+                    <li><a href="#community">Community Circle</a></li>
+                    <li><a href="#daily">Daily Shloka</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <div class="footer-col-heading">Scriptures</div>
+                <ul class="footer-links">
+                    <li><a href="#interpret" class="quick-load-link" data-verse="bg247">Bhagavad Gita</a></li>
+                    <li><a href="#interpret" class="quick-load-link" data-verse="gayatri">Rigveda &amp; Samhitas</a></li>
+                    <li><a href="#interpret" class="quick-load-link" data-verse="ishavasya">Mukhya Upanishads</a></li>
+                    <li><a href="#interpret" class="quick-load-link" data-verse="yogasutras">Patanjali Yoga Sutras</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <div class="footer-col-heading">Sanatana360</div>
+                <ul class="footer-links">
+                    <li><a href="javascript:void(0)" id="footerAboutLink">About Sanatana360</a></li>
+                    <li><a href="javascript:void(0)" id="footerApiDocsLink">FastAPI Architecture</a></li>
+                    <li><a href="javascript:void(0)" id="footerPrivacyLink">Privacy &amp; Respect</a></li>
+                    <li><a href="javascript:void(0)" id="footerTermsLink">Terms of Study</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p class="footer-copy">© 2026 Shlokawise by Sanatana360. All rights reserved. Crafted with devotion for Sanskrit seekers worldwide.</p>
+                <p class="footer-disclaimer">Scriptural translations and philosophical interpretations are generated for educational contemplation and spiritual reflection.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification for Copy/Actions -->
+    <div class="toast-notification" id="toastNotification" role="status" aria-live="polite">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toastMessage">Copied to clipboard</span>
+    </div>
+
+    <!-- Script File -->
+    <script src="script.js"></script>
 </body>
 </html>
