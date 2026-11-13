@@ -7,7 +7,11 @@ const downloadBtn = document.getElementById("downloadBtn");
 const clearBtn = document.getElementById("clearBtn");
 const charCount = document.getElementById("charCount");
 
-const API_URL = "http://127.0.0.1:8000/translate";
+const isLocalStaticServer = window.location.protocol === "file:" || 
+    (window.location.hostname === "localhost" && window.location.port !== "" && window.location.port !== "8000") ||
+    (window.location.hostname === "127.0.0.1" && window.location.port !== "" && window.location.port !== "8000");
+
+const API_URL = isLocalStaticServer ? "http://127.0.0.1:8000/translate" : "/translate";
 
 function updateCharacterCount() {
     if (charCount && inputText) {

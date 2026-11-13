@@ -86,6 +86,17 @@ Sanskrit-AI/
 
 ---
 
+### Vercel Deployment
+
+1. Import the repository `https://github.com/harshilguptahgs2007-ux/Sanskrit-AI` into your Vercel dashboard.
+2. In the Vercel project configuration, go to **Settings > Environment Variables**.
+3. Add the variable:
+   - **Key:** `SARVAM_API_KEY`
+   - **Value:** `your_sarvam_api_key_here`
+4. Click **Deploy**. Vercel will automatically build the FastAPI backend using `pyproject.toml` and serve both the frontend UI and the backend API!
+
+---
+
 ## ✨ Features
 
 - **Multi-language Support:** Translate from English, Hindi, Bengali, Gujarati, Kannada, Malayalam, Marathi, Odia, Punjabi, Tamil, and Telugu into Sanskrit.

@@ -1,5 +1,9 @@
+import os
+from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 try:
@@ -21,9 +25,11 @@ class TranslationRequest(BaseModel):
     text: str = Field(min_length=1, max_length=2000)
     source_language_code: str = "en-IN"
 
-@app.get("/")
-def home():
+@app.get("/health")
+@app.get("/api/health")
+def health():
     return {
+        "status": "healthy",
         "message": "Sanskrit AI Translator Backend is Running"
     }
 
@@ -47,5 +53,24 @@ def translate(request: TranslationRequest):
         print("Translation error:", str(error))
         raise HTTPException(
             status_code=502,
-            detail="Translation service failed. Please try again."
+            detail=f"Translation service failed: {str(error)}"
         )
+
+# Frontend static files mounting
+BASE_DIR = Path(__file__).resolve().parent.parent
+FRONTEND_DIR = BASE_DIR / "frontend"
+if not FRONTEND_DIR.exists():
+    FRONTEND_DIR = Path(__file__).resolve().parent / "frontend"
+
+if FRONTEND_DIR.exists() and (FRONTEND_DIR / "index.html").exists():
+    @app.get("/")
+    def serve_index():
+        return FileResponse(FRONTEND_DIR / "index.html")
+
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
+else:
+    @app.get("/")
+    def home():
+        return {
+            "message": "Sanskrit AI Translator Backend is Running"
+        }

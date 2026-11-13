@@ -1,0 +1,16 @@
+[project]
+name = "sanskrit-ai"
+version = "0.1.0"
+description = "Sanskrit AI Translator"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "python-dotenv>=1.0.0",
+    "sarvamai>=0.1.45",
+    "pydantic>=2.0.0"
+]
+
+[tool.vercel]
+entrypoint = "backend.app:app"
