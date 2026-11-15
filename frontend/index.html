@@ -152,16 +152,144 @@
                     </div>
                 </div>
 
+                <!-- English to Sanskrit Typing & Keyboard Helper Toolbar -->
+                <div class="keyboard-helper-toolbar">
+                    <div class="helper-left">
+                        <label class="translit-toggle-pill" title="Type in English (e.g. 'harshil', 'namaste', 'dharma') to automatically write in Sanskrit Devanagari!">
+                            <input type="checkbox" id="liveTranslitToggle" checked>
+                            <span class="pill-track">
+                                <span class="pill-thumb"></span>
+                            </span>
+                            <span class="pill-text"><strong>English ➔ Sanskrit</strong> Live Typing (No Hindi Keyboard Needed)</span>
+                        </label>
+                    </div>
+                    <div class="helper-right">
+                        <button type="button" class="tool-pill-btn" id="transliterateBtn" title="Convert current English text into Sanskrit Devanagari">
+                            <span class="btn-icon">⚡</span> Convert to Devanagari
+                        </button>
+                        <button type="button" class="tool-pill-btn" id="toggleVirtualKbBtn" title="Toggle On-Screen Sanskrit / Hindi Keyboard">
+                            <span class="btn-icon">⌨</span> Sanskrit Keyboard
+                        </button>
+                    </div>
+                </div>
+
+                <!-- On-Screen Virtual Sanskrit / Devanagari Keyboard -->
+                <div class="virtual-keyboard-panel" id="virtualKeyboardPanel" hidden>
+                    <div class="vk-header">
+                        <span class="vk-title">✦ Sanskrit / Devanagari On-Screen Keyboard</span>
+                        <span class="vk-hint">Click any letter, matra or sign to insert at cursor</span>
+                        <button type="button" class="vk-close-btn" id="closeVirtualKbBtn" aria-label="Close keyboard">&times;</button>
+                    </div>
+                    <!-- Swar (Vowels) -->
+                    <div class="vk-row-group">
+                        <span class="vk-row-label">Swar (Vowels):</span>
+                        <div class="vk-keys">
+                            <button type="button" class="vk-key" data-char="अ">अ</button>
+                            <button type="button" class="vk-key" data-char="आ">आ</button>
+                            <button type="button" class="vk-key" data-char="इ">इ</button>
+                            <button type="button" class="vk-key" data-char="ई">ई</button>
+                            <button type="button" class="vk-key" data-char="उ">उ</button>
+                            <button type="button" class="vk-key" data-char="ऊ">ऊ</button>
+                            <button type="button" class="vk-key" data-char="ऋ">ऋ</button>
+                            <button type="button" class="vk-key" data-char="ॠ">ॠ</button>
+                            <button type="button" class="vk-key" data-char="ए">ए</button>
+                            <button type="button" class="vk-key" data-char="ऐ">ऐ</button>
+                            <button type="button" class="vk-key" data-char="ओ">ओ</button>
+                            <button type="button" class="vk-key" data-char="औ">औ</button>
+                            <button type="button" class="vk-key" data-char="ॐ">ॐ</button>
+                        </div>
+                    </div>
+                    <!-- Matras & Diacritics -->
+                    <div class="vk-row-group">
+                        <span class="vk-row-label">Matras & Marks:</span>
+                        <div class="vk-keys">
+                            <button type="button" class="vk-key matra-key" data-char="ा">ा</button>
+                            <button type="button" class="vk-key matra-key" data-char="ि">ि</button>
+                            <button type="button" class="vk-key matra-key" data-char="ी">ी</button>
+                            <button type="button" class="vk-key matra-key" data-char="ु">ु</button>
+                            <button type="button" class="vk-key matra-key" data-char="ू">ू</button>
+                            <button type="button" class="vk-key matra-key" data-char="ृ">ृ</button>
+                            <button type="button" class="vk-key matra-key" data-char="े">े</button>
+                            <button type="button" class="vk-key matra-key" data-char="ै">ै</button>
+                            <button type="button" class="vk-key matra-key" data-char="ो">ो</button>
+                            <button type="button" class="vk-key matra-key" data-char="ौ">ौ</button>
+                            <button type="button" class="vk-key matra-key" data-char="ं" title="Anusvara">ं</button>
+                            <button type="button" class="vk-key matra-key" data-char="ः" title="Visarga">ः</button>
+                            <button type="button" class="vk-key matra-key" data-char="्" title="Halant / Virama">्</button>
+                            <button type="button" class="vk-key matra-key" data-char="ँ" title="Chandrabindu">ँ</button>
+                            <button type="button" class="vk-key matra-key" data-char="ऽ" title="Avagraha">ऽ</button>
+                            <button type="button" class="vk-key" data-char="।">।</button>
+                            <button type="button" class="vk-key" data-char="॥">॥</button>
+                        </div>
+                    </div>
+                    <!-- Vyanjan (Consonants) -->
+                    <div class="vk-row-group">
+                        <span class="vk-row-label">Vyanjan (Consonants):</span>
+                        <div class="vk-keys">
+                            <button type="button" class="vk-key" data-char="क">क</button>
+                            <button type="button" class="vk-key" data-char="ख">ख</button>
+                            <button type="button" class="vk-key" data-char="ग">ग</button>
+                            <button type="button" class="vk-key" data-char="घ">घ</button>
+                            <button type="button" class="vk-key" data-char="ङ">ङ</button>
+                            <button type="button" class="vk-key" data-char="च">च</button>
+                            <button type="button" class="vk-key" data-char="छ">छ</button>
+                            <button type="button" class="vk-key" data-char="ज">ज</button>
+                            <button type="button" class="vk-key" data-char="झ">झ</button>
+                            <button type="button" class="vk-key" data-char="ञ">ञ</button>
+                            <button type="button" class="vk-key" data-char="ट">ट</button>
+                            <button type="button" class="vk-key" data-char="ठ">ठ</button>
+                            <button type="button" class="vk-key" data-char="ड">ड</button>
+                            <button type="button" class="vk-key" data-char="ढ">ढ</button>
+                            <button type="button" class="vk-key" data-char="ण">ण</button>
+                            <button type="button" class="vk-key" data-char="त">त</button>
+                            <button type="button" class="vk-key" data-char="थ">थ</button>
+                            <button type="button" class="vk-key" data-char="द">द</button>
+                            <button type="button" class="vk-key" data-char="ध">ध</button>
+                            <button type="button" class="vk-key" data-char="न">न</button>
+                            <button type="button" class="vk-key" data-char="प">प</button>
+                            <button type="button" class="vk-key" data-char="फ">फ</button>
+                            <button type="button" class="vk-key" data-char="ब">ब</button>
+                            <button type="button" class="vk-key" data-char="भ">भ</button>
+                            <button type="button" class="vk-key" data-char="म">म</button>
+                            <button type="button" class="vk-key" data-char="य">य</button>
+                            <button type="button" class="vk-key" data-char="र">र</button>
+                            <button type="button" class="vk-key" data-char="ल">ल</button>
+                            <button type="button" class="vk-key" data-char="व">व</button>
+                            <button type="button" class="vk-key" data-char="श">श</button>
+                            <button type="button" class="vk-key" data-char="ष">ष</button>
+                            <button type="button" class="vk-key" data-char="स">स</button>
+                            <button type="button" class="vk-key" data-char="ह">ह</button>
+                            <button type="button" class="vk-key" data-char="क्ष">क्ष</button>
+                            <button type="button" class="vk-key" data-char="त्र">त्र</button>
+                            <button type="button" class="vk-key" data-char="ज्ञ">ज्ञ</button>
+                            <button type="button" class="vk-key" data-char="श्र">श्र</button>
+                            <button type="button" class="vk-key vk-action-key" id="vkSpaceBtn" title="Space">Space</button>
+                            <button type="button" class="vk-key vk-action-key" id="vkBackspaceBtn" title="Backspace">⌫ Del</button>
+                            <button type="button" class="vk-key vk-action-key" id="vkClearBtn" title="Clear">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Textarea -->
                 <div class="textarea-wrapper">
                     <textarea 
                         id="shlokaInput" 
                         class="shloka-textarea" 
                         rows="4" 
-                        placeholder="e.g. कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।&#10;मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥"
+                        placeholder="Type in English (e.g. harshil, namaste, BG 2.47) or paste Sanskrit shloka..."
                         spellcheck="false"
                     ></textarea>
                     <div class="char-counter" id="charCounter">0 / 4000 characters</div>
+                </div>
+
+                <!-- Transliteration Notice & Conversion Quick-Pill -->
+                <div class="translit-status-bar" id="translitStatusBar" hidden>
+                    <span class="status-icon">✦</span>
+                    <span class="status-msg" id="translitStatusMsg">English text detected. Convert to Sanskrit or translate:</span>
+                    <div class="status-actions">
+                        <button type="button" class="mini-status-btn" id="miniTranslitBtn">Convert to Sanskrit (Phonetic)</button>
+                        <button type="button" class="mini-status-btn primary" id="miniTranslateBtn">Translate to Sanskrit (AI)</button>
+                    </div>
                 </div>
 
                 <!-- Validation / Feedback Banner -->
@@ -197,8 +325,12 @@
                         </button>
                     </div>
 
-                    <!-- Interpret Button -->
+                    <!-- Action Submit Group -->
                     <div class="action-submit-group">
+                        <button type="button" class="translate-btn" id="translateBtn" title="Translate English words or sentences into Sanskrit">
+                            <span class="btn-spinner" id="translateSpinner" hidden></span>
+                            <span class="btn-label" id="translateBtnLabel">Translate English ➔ Sanskrit ॐ</span>
+                        </button>
                         <button type="button" class="interpret-btn" id="interpretBtn">
                             <span class="btn-spinner" id="btnSpinner" hidden></span>
                             <span class="btn-label" id="btnLabel">Interpret ✦</span>
@@ -220,8 +352,17 @@
                     The interpretation request could not reach the backend server.
                 </p>
                 <div class="error-instructions">
-                    <div class="instructions-label">How to start your local backend:</div>
-                    <code>uvicorn backend.app:app --reload --port 8000</code>
+                    <div class="instructions-label">How to start your local backend (choose one):</div>
+                    <div class="code-box-row">
+                        <code>uvicorn backend.app:app --reload --port 8000</code>
+                        <button type="button" class="copy-cmd-btn" id="copyCmdBtn" title="Copy command">Copy</button>
+                    </div>
+                    <div class="instructions-subnote">
+                        💡 <strong>Windows Shortcut:</strong> You can also simply double-click <code>run_backend.bat</code> in the repository folder!
+                    </div>
+                </div>
+                <div class="error-actions-row">
+                    <button type="button" class="fallback-explore-btn" id="fallbackExploreBtn">✦ Load Canonical Shloka Offline</button>
                 </div>
             </div>
         </section>

@@ -471,11 +471,23 @@ Return ONLY valid JSON without preamble."""
     try:
         response = client.chat.completions(
             messages=[{"role": "user", "content": prompt}],
-            model="sarvam-105b"
+            model="sarvam-105b-conversations",
+            max_tokens=4096
         )
 
         msg = response.choices[0].message
         content = (msg.content or "").strip()
+
+        if not content:
+            # Fallback to sarvam-105b with low reasoning
+            response = client.chat.completions(
+                messages=[{"role": "user", "content": prompt}],
+                model="sarvam-105b",
+                reasoning_effort="low",
+                max_tokens=4096
+            )
+            msg = response.choices[0].message
+            content = (msg.content or "").strip()
 
         if not content:
             raise ValueError("Empty response received from Sarvam AI.")

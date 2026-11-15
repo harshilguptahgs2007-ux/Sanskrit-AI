@@ -44,11 +44,20 @@ Sanskrit-AI-Translator/
 
 ## 🚀 How to Run Locally
 
-### Option 1: Full-Stack with FastAPI (Recommended)
+### ⚡ Quickest Way on Windows:
+Simply double-click **`run_backend.bat`** (or `start.bat`) in the root folder!
+It will:
+1. Detect Python and activate your virtual environment.
+2. Launch the FastAPI backend on `http://127.0.0.1:8000`.
+3. Automatically open `http://127.0.0.1:8000` in your default browser.
+
+---
+
+### Option 1: Full-Stack with FastAPI (Manual)
 
 1. Open your terminal in the project root:
    ```bash
-   cd c:\Users\ASUS\Downloads\Sanskrit-AI-Translator
+   cd Sanskrit-AI-Translator
    ```
 
 2. Activate the virtual environment:
@@ -80,7 +89,26 @@ Sanskrit-AI-Translator/
    ```
    http://127.0.0.1:8000
    ```
-   The FastAPI server automatically serves the frontend interface (`index.html`, `style.css`, `script.js`) and powers the `/interpret` API!
+   The FastAPI server automatically serves the frontend interface (`index.html`, `style.css`, `script.js`) and powers the `/interpret` and `/translate` APIs!
+
+---
+
+## ⌨️ Typing & Converting English to Sanskrit (No Hindi Keyboard Needed)
+
+For users who do not have a physical or software Hindi/Devanagari keyboard installed, Shlokawise provides 4 built-in solutions:
+
+1. **Live English ➔ Sanskrit Typing:**
+   - Toggle the switch above the input box: `[x] English ➔ Sanskrit Live Typing`.
+   - Simply type phonetically in English (e.g. `harshil`, `namaste`, `dharma`, `karma`, `shanti`, `om`) and press **Space** — it instantly converts to Sanskrit Devanagari (`हर्षिल`, `नमस्ते`, `धर्म`, `कर्म`, `शान्ति`, `ॐ`)!
+2. **AI English to Sanskrit Translation:**
+   - Type any English word, sentence, or query (e.g. *"harshil"*, *"knowledge is power"*, *"truth alone triumphs"*).
+   - Click **`Translate English ➔ Sanskrit ॐ`** to obtain authentic Sanskrit translation via Sarvam AI.
+3. **On-Screen Sanskrit / Hindi Virtual Keyboard:**
+   - Click **`⌨ Sanskrit Keyboard`** to open the on-screen palette with all Sanskrit Swar (Vowels), Matras, Marks (Anusvara, Visarga, Halant, Avagraha), and Vyanjan (Consonants). Click any character to insert at the cursor.
+4. **Auto-Detection on Interpret:**
+   - If you paste or type English text and click **`Interpret ✦`**, the AI automatically translates your English input into Sanskrit, renders the verse, and produces the complete scholarly analysis!
+
+---
 
 ---
 
