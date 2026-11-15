@@ -457,6 +457,214 @@ button {
     color: var(--text-muted-brown);
 }
 
+/* Auth Login Navbar Button */
+.auth-login-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    background: #ffffff;
+    border: 1.5px solid var(--primary-orange);
+    border-radius: 24px;
+    color: var(--primary-orange);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: 0 2px 8px rgba(201, 106, 22, 0.12);
+}
+
+.auth-login-btn:hover {
+    background: var(--primary-orange);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(201, 106, 22, 0.25);
+}
+
+.auth-btn-icon {
+    font-family: var(--font-sanskrit);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.mobile-auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    background: var(--primary-orange);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Authentication Modal Dialog */
+.auth-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(73, 51, 35, 0.55);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.25s ease;
+}
+
+.auth-modal-overlay[hidden] {
+    display: none !important;
+}
+
+.auth-modal-card {
+    background: var(--bg-ivory);
+    border: 1px solid var(--border-peach);
+    border-radius: var(--radius-xl);
+    max-width: 440px;
+    width: 100%;
+    padding: 30px 28px;
+    box-shadow: 0 20px 50px rgba(73, 51, 35, 0.2);
+    position: relative;
+    animation: slideUpFade 0.3s ease;
+}
+
+.auth-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.auth-badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: var(--primary-orange);
+    text-transform: uppercase;
+}
+
+.auth-close-btn {
+    font-size: 24px;
+    color: var(--text-muted-brown);
+    cursor: pointer;
+    line-height: 1;
+    background: none;
+    border: none;
+    padding: 0 4px;
+}
+
+.auth-close-btn:hover {
+    color: var(--primary-orange);
+}
+
+.auth-title {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-dark-brown);
+    margin-bottom: 6px;
+}
+
+.auth-subtitle {
+    font-size: 13.5px;
+    color: var(--text-muted-brown);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.auth-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dark-brown);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.auth-field input {
+    padding: 10px 14px;
+    background: #ffffff;
+    border: 1px solid var(--border-peach);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: var(--text-dark-brown);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.auth-field input:focus {
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 3px rgba(201, 106, 22, 0.12);
+}
+
+.auth-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.auth-submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: var(--primary-orange);
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(201, 106, 22, 0.3);
+    transition: all var(--transition-fast);
+}
+
+.auth-submit-btn:hover {
+    background: var(--primary-orange-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(201, 106, 22, 0.4);
+}
+
+.auth-guest-btn {
+    padding: 9px;
+    background: transparent;
+    color: var(--text-muted-brown);
+    border: 1px dashed var(--border-peach);
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.auth-guest-btn:hover {
+    background: var(--cream-surface);
+    color: var(--primary-orange);
+    border-color: var(--primary-orange);
+}
+
 /* --------------------------------------------------------------------------
    4. Hero Section
    -------------------------------------------------------------------------- */

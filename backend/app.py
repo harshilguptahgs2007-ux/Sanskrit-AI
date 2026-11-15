@@ -12,9 +12,11 @@ import re
 try:
     from backend.translator import translate_to_sanskrit
     from backend.analyzer import interpret_shloka
+    from backend.database import create_user, authenticate_user, get_or_register_user
 except ModuleNotFoundError:
     from translator import translate_to_sanskrit
     from analyzer import interpret_shloka
+    from database import create_user, authenticate_user, get_or_register_user
 
 app = FastAPI(title="Sanskrit AI Translator")
 
@@ -26,15 +28,22 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+class AuthRequest(BaseModel):
+    name: Optional[str] = None
+    email: str
+    password: Optional[str] = "seeker123"
+
 class TranslationRequest(BaseModel):
     text: Optional[str] = None
     shloka: Optional[str] = None
     source_language_code: str = "en-IN"
+    user_email: Optional[str] = None
 
 class InterpretRequest(BaseModel):
     shloka: Optional[str] = None
     text: Optional[str] = None
     mode: str = "full"
+    user_email: Optional[str] = None
 
 @app.get("/health")
 @app.get("/api/health")
@@ -43,6 +52,44 @@ def health():
         "status": "healthy",
         "message": "Sanskrit AI Translator Backend is Running"
     }
+
+@app.post("/register")
+@app.post("/api/register")
+def register_endpoint(request: AuthRequest):
+    try:
+        user = create_user(
+            name=request.name or "",
+            email=request.email,
+            password=request.password or "seeker123"
+        )
+        return {
+            "success": True,
+            "user": user,
+            "message": "Seeker registered successfully ✦"
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Registration error: {str(e)}")
+
+@app.post("/login")
+@app.post("/api/login")
+def login_endpoint(request: AuthRequest):
+    try:
+        user = get_or_register_user(
+            name=request.name or "",
+            email=request.email,
+            password=request.password or "seeker123"
+        )
+        return {
+            "success": True,
+            "user": user,
+            "message": "Signed in successfully ✦"
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Login error: {str(e)}")
 
 @app.post("/translate")
 @app.post("/api/translate")

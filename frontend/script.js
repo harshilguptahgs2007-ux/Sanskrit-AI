@@ -21,6 +21,7 @@
 
     const INTERPRET_ENDPOINT = `${getBaseApiUrl()}/interpret`;
     const TRANSLATE_ENDPOINT = `${getBaseApiUrl()}/translate`;
+    const LOGIN_ENDPOINT = `${getBaseApiUrl()}/login`;
 
     // Authentic Sanskrit verses for the 5 example buttons
     const SCRIPTURE_EXAMPLES = {
@@ -514,11 +515,32 @@
     const copyCmdBtn = document.getElementById("copyCmdBtn");
     const fallbackExploreBtn = document.getElementById("fallbackExploreBtn");
 
-    // Navigation & Dropdown
+    // Navigation & Authentication Elements
+    const navLoginBtn = document.getElementById("navLoginBtn");
+    const profileDropdownContainer = document.getElementById("profileDropdownContainer");
     const profileBtn = document.getElementById("profileBtn");
     const profileMenu = document.getElementById("profileMenu");
+    const navUsername = document.getElementById("navUsername");
+    const menuUserName = document.getElementById("menuUserName");
+    const menuUserEmail = document.getElementById("menuUserEmail");
+    const menuSignOut = document.getElementById("menuSignOut");
     const mobileMenuBtn = document.getElementById("mobileMenuBtn");
     const mobileDrawer = document.getElementById("mobileDrawer");
+    const mobileAuthBtn = document.getElementById("mobileAuthBtn");
+    const mobileAuthLabel = document.getElementById("mobileAuthLabel");
+
+    // Login Modal Elements
+    const loginModal = document.getElementById("loginModal");
+    const closeLoginModalBtn = document.getElementById("closeLoginModalBtn");
+    const authForm = document.getElementById("authForm");
+    const authNameInput = document.getElementById("authNameInput");
+    const authEmailInput = document.getElementById("authEmailInput");
+    const authPasswordInput = document.getElementById("authPasswordInput");
+    const authSubmitBtn = document.getElementById("authSubmitBtn");
+    const authSpinner = document.getElementById("authSpinner");
+    const authBtnLabel = document.getElementById("authBtnLabel");
+    const authGuestBtn = document.getElementById("authGuestBtn");
+
     const toastNotification = document.getElementById("toastNotification");
     const toastMessage = document.getElementById("toastMessage");
 
@@ -529,6 +551,166 @@
     let selectedMode = "full";
     let lastInterpretationData = null;
     let isRequestInProgress = false;
+    let pendingActionAfterLogin = null;
+
+    // -------------------------------------------------------------------------
+    // 4. Seeker Authentication & Database Sync
+    // -------------------------------------------------------------------------
+    function getCurrentUser() {
+        try {
+            const raw = localStorage.getItem("shlokawise_user");
+            return raw ? JSON.parse(raw) : null;
+        } catch {
+            return null;
+        }
+    }
+
+    function setCurrentUser(user) {
+        try {
+            localStorage.setItem("shlokawise_user", JSON.stringify(user));
+        } catch (e) {
+            console.warn("localStorage error:", e);
+        }
+        updateAuthUI();
+    }
+
+    function clearCurrentUser() {
+        try {
+            localStorage.removeItem("shlokawise_user");
+        } catch (e) {
+            console.warn("localStorage error:", e);
+        }
+        updateAuthUI();
+    }
+
+    function updateAuthUI() {
+        const user = getCurrentUser();
+
+        if (user && user.name) {
+            if (navLoginBtn) navLoginBtn.hidden = true;
+            if (profileDropdownContainer) profileDropdownContainer.hidden = false;
+
+            const parts = user.name.trim().split(/\s+/);
+            const shortName = parts.length > 1 ? `${parts[0]} ${parts[1][0]}.` : parts[0];
+            if (navUsername) navUsername.textContent = shortName;
+            if (menuUserName) menuUserName.textContent = user.name;
+            if (menuUserEmail) menuUserEmail.textContent = user.email || "seeker@shlokawise.org";
+            if (mobileAuthLabel) mobileAuthLabel.textContent = `${shortName} (Signed In)`;
+        } else {
+            if (navLoginBtn) navLoginBtn.hidden = false;
+            if (profileDropdownContainer) profileDropdownContainer.hidden = true;
+            if (mobileAuthLabel) mobileAuthLabel.textContent = "Log In / Sign Up";
+        }
+    }
+
+    function openLoginModal(actionCallback = null) {
+        if (actionCallback) {
+            pendingActionAfterLogin = actionCallback;
+        }
+        if (loginModal) {
+            loginModal.hidden = false;
+            if (authNameInput) authNameInput.focus();
+        }
+    }
+
+    function closeLoginModal() {
+        if (loginModal) {
+            loginModal.hidden = true;
+        }
+    }
+
+    async function handleAuthSubmit(e) {
+        if (e) e.preventDefault();
+        const name = authNameInput ? authNameInput.value.trim() : "";
+        const email = authEmailInput ? authEmailInput.value.trim().toLowerCase() : "";
+        const password = authPasswordInput ? authPasswordInput.value.trim() : "seeker123";
+
+        if (!name) {
+            showToast("Please enter your name.");
+            if (authNameInput) authNameInput.focus();
+            return;
+        }
+        if (!email || !email.includes("@")) {
+            showToast("Please enter a valid email address.");
+            if (authEmailInput) authEmailInput.focus();
+            return;
+        }
+
+        if (authSubmitBtn) authSubmitBtn.disabled = true;
+        if (authSpinner) authSpinner.hidden = false;
+        if (authBtnLabel) authBtnLabel.textContent = "Authenticating...";
+
+        try {
+            // Save in SQLite Database via FastAPI backend
+            const response = await fetch(LOGIN_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password })
+            });
+
+            let userData;
+            if (response.ok) {
+                const data = await response.json();
+                userData = data.user || { name, email };
+            } else {
+                const errData = await response.json().catch(() => ({}));
+                console.warn("Backend auth notice:", errData);
+                userData = { name, email };
+            }
+
+            setCurrentUser(userData);
+            closeLoginModal();
+            showToast(`Welcome, ${userData.name}! ✦`);
+
+            // Automatically execute the pending English-to-Sanskrit conversion!
+            if (typeof pendingActionAfterLogin === "function") {
+                const action = pendingActionAfterLogin;
+                pendingActionAfterLogin = null;
+                setTimeout(() => action(), 150);
+            }
+
+        } catch (err) {
+            console.warn("Offline auth fallback:", err);
+            const userData = { name, email };
+            setCurrentUser(userData);
+            closeLoginModal();
+            showToast(`Welcome, ${name}! (Offline mode) ✦`);
+
+            if (typeof pendingActionAfterLogin === "function") {
+                const action = pendingActionAfterLogin;
+                pendingActionAfterLogin = null;
+                setTimeout(() => action(), 150);
+            }
+        } finally {
+            if (authSubmitBtn) authSubmitBtn.disabled = false;
+            if (authSpinner) authSpinner.hidden = true;
+            if (authBtnLabel) authBtnLabel.textContent = "Sign In & Convert ✦";
+        }
+    }
+
+    function handleGuestLogin() {
+        const guestUser = {
+            name: "Guest Seeker",
+            email: `seeker_${Date.now().toString().slice(-4)}@shlokawise.org`
+        };
+
+        // Async save to SQLite DB
+        fetch(LOGIN_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: guestUser.name, email: guestUser.email, password: "guest" })
+        }).catch(() => {});
+
+        setCurrentUser(guestUser);
+        closeLoginModal();
+        showToast("Signed in as Guest Seeker ✦");
+
+        if (typeof pendingActionAfterLogin === "function") {
+            const action = pendingActionAfterLogin;
+            pendingActionAfterLogin = null;
+            setTimeout(() => action(), 150);
+        }
+    }
 
     // -------------------------------------------------------------------------
     // 4. UI Helpers: Character Count, Toast, Errors
@@ -667,6 +849,12 @@
             return;
         }
 
+        // Gate with login
+        if (!getCurrentUser()) {
+            openLoginModal(() => convertInputToDevanagari());
+            return;
+        }
+
         const converted = transliterateEnglishToDevanagari(val);
         shlokaInput.value = converted;
         updateCharacterCount();
@@ -772,6 +960,12 @@
             return;
         }
 
+        // Gate with login
+        if (!getCurrentUser()) {
+            openLoginModal(() => handleTranslation());
+            return;
+        }
+
         hideValidation();
         hideError();
         setTranslatingState(true);
@@ -833,8 +1027,53 @@
     }
 
     // -------------------------------------------------------------------------
-    // 7. Navigation & Profile Dropdown
+    // 7. Navigation & Profile Dropdown & Authentication Modal
     // -------------------------------------------------------------------------
+    if (navLoginBtn) {
+        navLoginBtn.addEventListener("click", () => openLoginModal());
+    }
+
+    if (mobileAuthBtn) {
+        mobileAuthBtn.addEventListener("click", () => {
+            if (getCurrentUser()) {
+                clearCurrentUser();
+                showToast("Signed out of Seeker account");
+            } else {
+                openLoginModal();
+            }
+        });
+    }
+
+    if (closeLoginModalBtn) {
+        closeLoginModalBtn.addEventListener("click", closeLoginModal);
+    }
+
+    if (loginModal) {
+        loginModal.addEventListener("click", (e) => {
+            if (e.target === loginModal) {
+                closeLoginModal();
+            }
+        });
+    }
+
+    if (authForm) {
+        authForm.addEventListener("submit", handleAuthSubmit);
+    }
+
+    if (authGuestBtn) {
+        authGuestBtn.addEventListener("click", handleGuestLogin);
+    }
+
+    if (menuSignOut) {
+        menuSignOut.addEventListener("click", () => {
+            clearCurrentUser();
+            const container = document.querySelector(".profile-dropdown-container");
+            if (container) container.classList.remove("open");
+            if (profileBtn) profileBtn.setAttribute("aria-expanded", "false");
+            showToast("Signed out of Seeker account");
+        });
+    }
+
     if (profileBtn && profileMenu) {
         profileBtn.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -996,6 +1235,13 @@
 
         if (rawText.length > 4000) {
             showValidation("Shloka text exceeds the maximum 4000 character limit.");
+            return;
+        }
+
+        // Gate English conversion with login
+        const hasEnglish = /[a-zA-Z]/.test(rawText);
+        if (hasEnglish && !getCurrentUser()) {
+            openLoginModal(() => handleInterpretation());
             return;
         }
 
@@ -1441,7 +1687,8 @@
             .replace(/'/g, "&#039;");
     }
 
-    // Initialize character counter
+    // Initialize character counter & Authentication UI
     updateCharacterCount();
+    updateAuthUI();
 
 })();

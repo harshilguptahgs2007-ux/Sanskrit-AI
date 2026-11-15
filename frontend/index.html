@@ -37,14 +37,21 @@
                 <a href="#daily" class="nav-link">Daily</a>
             </div>
 
-            <!-- Right Profile Menu -->
+            <!-- Right Profile / Login Menu -->
             <div class="nav-right">
-                <div class="profile-dropdown-container">
+                <!-- Logged Out Button -->
+                <button type="button" class="auth-login-btn" id="navLoginBtn">
+                    <span class="auth-btn-icon">ॐ</span>
+                    <span class="auth-btn-text">Log In / Sign Up</span>
+                </button>
+
+                <!-- Logged In Profile Dropdown -->
+                <div class="profile-dropdown-container" id="profileDropdownContainer" hidden>
                     <button class="profile-button" id="profileBtn" aria-expanded="false" aria-haspopup="true">
                         <div class="profile-avatar">
                             <span class="avatar-icon">ॐ</span>
                         </div>
-                        <span class="profile-username">Arjun V.</span>
+                        <span class="profile-username" id="navUsername">Seeker</span>
                         <svg class="dropdown-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
@@ -54,25 +61,23 @@
                     <div class="profile-menu" id="profileMenu">
                         <div class="profile-menu-header">
                             <div class="menu-user-badge">Seeker Account</div>
-                            <div class="menu-user-name">Arjun Varma</div>
-                            <div class="menu-user-email">arjun@sanatana360.org</div>
+                            <div class="menu-user-name" id="menuUserName">Seeker</div>
+                            <div class="menu-user-email" id="menuUserEmail">seeker@example.com</div>
                         </div>
                         <div class="profile-menu-items">
-                            <a href="#saved" class="profile-menu-item" id="menuSavedShlokas">
+                            <a href="#interpret" class="profile-menu-item" id="menuSavedShlokas">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                                <span>My Saved Shlokas</span>
-                                <span class="menu-item-badge">12</span>
-                            </a>
-                            <a href="#history" class="profile-menu-item" id="menuReadingHistory">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                <span>Reading History</span>
-                            </a>
-                            <a href="#preferences" class="profile-menu-item" id="menuPreferences">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                                <span>Tradition: Advaita</span>
+                                <span>My Sanskrit Translates</span>
                             </a>
                             <div class="profile-menu-divider"></div>
-                            <button class="profile-menu-item signout-btn" id="menuSignOut">
+                            <button type="button" class="profile-menu-item signout-btn" id="menuSignOut">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                                <span>Sign Out</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                                 <span>Sign Out</span>
                             </button>
@@ -96,10 +101,10 @@
             <a href="#community" class="mobile-nav-link">Community</a>
             <a href="#daily" class="mobile-nav-link">Daily</a>
             <div class="mobile-drawer-footer">
-                <div class="mobile-user-row">
+                <button type="button" class="mobile-auth-btn" id="mobileAuthBtn">
                     <span class="avatar-icon">ॐ</span>
-                    <span class="profile-username">Arjun V. (Sanatana360)</span>
-                </div>
+                    <span id="mobileAuthLabel">Log In / Sign Up</span>
+                </button>
             </div>
         </div>
     </header>
@@ -756,6 +761,43 @@
     <div class="toast-notification" id="toastNotification" role="status" aria-live="polite">
         <span class="toast-icon">✓</span>
         <span class="toast-message" id="toastMessage">Copied to clipboard</span>
+    </div>
+
+    <!-- Seeker Authentication Modal -->
+    <div class="auth-modal-overlay" id="loginModal" hidden>
+        <div class="auth-modal-card">
+            <div class="auth-modal-header">
+                <div class="auth-badge">✦ SANSKRIT AI SEEKER ACCESS</div>
+                <button type="button" class="auth-close-btn" id="closeLoginModalBtn">&times;</button>
+            </div>
+            <h3 class="auth-title">Sign In to Convert to Sanskrit</h3>
+            <p class="auth-subtitle" id="authSubtitle">Please sign in to convert English to authentic Sanskrit. Your account is saved so you can access your translations anytime.</p>
+            
+            <form id="authForm" class="auth-form">
+                <div class="auth-field">
+                    <label for="authNameInput">Your Name</label>
+                    <input type="text" id="authNameInput" placeholder="e.g. Harshil Gupta" required autocomplete="name">
+                </div>
+                <div class="auth-field">
+                    <label for="authEmailInput">Email Address</label>
+                    <input type="email" id="authEmailInput" placeholder="e.g. harshil@example.com" required autocomplete="email">
+                </div>
+                <div class="auth-field">
+                    <label for="authPasswordInput">Password / PIN</label>
+                    <input type="password" id="authPasswordInput" placeholder="Enter password (minimum 4 characters)" value="seeker123" autocomplete="current-password" required>
+                </div>
+                
+                <div class="auth-actions">
+                    <button type="submit" class="auth-submit-btn" id="authSubmitBtn">
+                        <span class="btn-spinner" id="authSpinner" hidden></span>
+                        <span id="authBtnLabel">Sign In &amp; Convert ✦</span>
+                    </button>
+                    <button type="button" class="auth-guest-btn" id="authGuestBtn">
+                        ⚡ Quick Guest Sign In
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Script File -->
